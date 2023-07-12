@@ -20,6 +20,11 @@ To use the application, follow the steps below:
 
 4. Register and Login: Once you run the application, you will go to a page where you can either register for an account with the necessary details or click on login if you already have an account. Once registered, log in to access the application.
 
+<p align="center">
+  <img src="Images/1.png" alt="image_description" width="200"/><br>
+</p>
+
+
 5. Upload Job Description and Resumes: Upload the job description file and a folder containing all the resumes you want to process.
 
 6. Submit for Classification: Click on the "Submit" button to initiate the classification process. The application will categorize the resumes based on the job description and you will get the required results.
