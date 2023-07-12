@@ -3,19 +3,18 @@
 ## Introduction
 This repository contains a Python application for resume summarization and classification. It leverages Natural Language Processing (NLP) techniques and OpenAI models to extract key information from resumes and provide a concise summary. Additionally, it performs classification to categorize resumes based on job descriptions.
 
-Instructions
+### Instructions
 To use the application, follow the steps below:
 
-Clone the Repository: Clone the repository by executing the following command:
+1. Clone the Repository: Clone the repository by executing the following command:
 
-bash
-Copy code
-git clone https://github.com/Sreeja-website/Resume-Summarization-and-Classification.git
-Install Dependencies: Install the required dependencies by running the following command:
+   git clone https://github.com/Sreeja-website/Resume-Summarization-and-Classification.git
 
-Copy code
-pip install -r requirements.txt
-Run the Application: Start the Python application by running the following command:
+2. Install Dependencies: Install the required dependencies by running the following command:
+
+    pip install -r requirements.txt
+   
+3. Run the Application: Start the Python application by running the following command:
 
 Copy code
 python app.py
