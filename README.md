@@ -24,8 +24,22 @@ To use the application, follow the steps below:
   <img src="Images/1.png" alt="image_description" width="800"/><br>
 </p>
 
+<p align="center">
+  <img src="Images/3.png" alt="image_description" width="800"/><br>
+</p>
+
+
+<p align="center">
+  <img src="Images/4.png" alt="image_description" width="800"/><br>
+</p>
+
 
 5. Upload Job Description and Resumes: Upload the job description file and a folder containing all the resumes you want to process.
+
+<p align="center">
+  <img src="Images/5.png" alt="image_description" width="800"/><br>
+</p>
+
 
 6. Submit for Classification: Click on the "Submit" button to initiate the classification process. The application will categorize the resumes based on the job description and you will get the required results.
 
