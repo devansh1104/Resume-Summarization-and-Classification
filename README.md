@@ -21,7 +21,7 @@ To use the application, follow the steps below:
 4. Register and Login: Once you run the application, you will go to a page where you can either register for an account with the necessary details or click on login if you already have an account. Once registered, log in to access the application.
 
 <p align="center">
-  <img src="Images/1.png" alt="image_description" width="200"/><br>
+  <img src="Images/1.png" alt="image_description" width="800"/><br>
 </p>
 
 
