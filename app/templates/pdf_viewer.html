@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Page</title>
+  <style>
+    #pdf-viewer {
+      width: 100%;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h1>File: {{ filename }}</h1>
+  <div id="pdf-viewer">
+    <iframe src="{{ url_for('static', filename=filename) }}" width="100%" height="100%" frameborder="0" scrolling="auto"></iframe>
+  </div>
+</body>
+</html>

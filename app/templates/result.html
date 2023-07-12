@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Analysis Results</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Resume Analysis Results</h1>
+  
+  <h2>Category Matching Percentage</h2>
+  <table>
+    <tr>
+      <th>File Name</th>
+      <th>Percentage Matching</th>
+      <th>Category</th>
+      <th>Basis of Classification</th>
+    </tr>
+    {% for result in category_result %}
+      <tr>
+        <td>{{ result['File Name'] }}</td>
+        <td>{{ result['Percentage Matching'] }}</td>
+        <td>{{ result['Category'] }}</td>
+        <td>{{ result['Basis of Classification'] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  
+  <h2>Individual Resume Results</h2>
+  {% for index in range(len(file_names)) %}
+    <h3>{{ file_names[index] }}</h3>
+    <p>File Path: {{ file_paths[index] }}</p>
+    <!-- Add any additional information from the result_list for each resume -->
+  {% endfor %}
+  
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 30px;
+  background-image: url("static/a1.jpg");
+  background-size: center;
+  background-position: center;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  background-color: rgba(241, 234, 234, 0.5);
+  margin: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #000;
+  table-layout: fixed;
+  width: 100%;
+  background-color: rgba(241, 234, 234, 0.1);
+  vertical-align: top;
+}
+
+th,
+td {
+  white-space: pre-wrap;
+  border: 1px solid #000;
+  text-align: center;
+  padding-bottom: 100px;
+  vertical-align: top;
+  word-wrap: break-word;
+  overflow-y: auto;
+}
+
+
+
+th {
+      background-color: #f0ebf5;
+      text-align: center;
+      color: #333;
+      padding: 10px;
+      vertical-align: top;
+    }
+
+th a {
+  color: blue;
+  text-decoration: underline;
+  vertical-align: top;
+}
+
+th a:hover {
+  color: #21568C;
+  vertical-align: top;
+}
+
+.ascending::after {
+  content: '▲';
+  float: right;
+  margin-left: 5px;
+}
+
+.hover-cell {
+  position: relative;
+  cursor: pointer;
+}
+
+.hover-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  word-wrap: break-word;
+  white-space: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  z-index: 999;
+}
+
+.hover-content .hover-text {
+  display: block;
+}
+
+.hover-content .actual-content {
+  display: none;
+  overflow-wrap: break-word;
+}
+
+.hover-cell:hover .hover-text {
+  display: none;
+}
+
+.hover-cell:hover .actual-content {
+  display: block;
+}
+
+h1 {
+  color: #090909;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 120px;
+  padding-top: 10px;
+  padding-bottom: -10px;
+}
+
+.descending::after {
+  content: '▼';
+  float: right;
+  margin-left: 5px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.back-button,
+.proceed-button {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button {
+  order: 1;
+}
+
+.file-link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.proceed-button {
+  order: 2;
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.proceed-button:disabled {
+  background-color: lightgray;
+  color: gray;
+  cursor: not-allowed;
+}
+
+.proceed-button:disabled::before {
+  content: "Disabled";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+  <script>
+    function adjustCellSizes() {
+    var rows = document.getElementsByTagName("tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var cell = row.querySelector("td:last-child");
+      var actualContent = cell.querySelector(".actual-content");
+      cell.style.height = actualContent.offsetHeight + "px";
+    }
+  }
+
+    function sortTable(columnIndex) {
+      var table, rows, switching, i, x, y, shouldSwitch, shouldSortAscending;
+      table = document.getElementById("resultTable");
+      switching = true;
+      shouldSortAscending = table.getAttribute("data-sort-column") === columnIndex.toString() && table.getAttribute("data-sort-order") === "ascending";
+      
+      if (shouldSortAscending) {
+        table.setAttribute("data-sort-order", "descending");
+      } else {
+        table.setAttribute("data-sort-column", columnIndex.toString());
+        table.setAttribute("data-sort-order", "ascending");
+      }
+  
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[columnIndex];
+          y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+          var xValue = x.innerHTML.toLowerCase();
+          var yValue = y.innerHTML.toLowerCase();
+          if (columnIndex === 0) {
+            if (shouldSortAscending) {
+              if (xValue > yValue) {
+                shouldSwitch = true;
+                break;
+              }
+            } else {
+              if (xValue < yValue) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+          } else if (columnIndex === 2) {
+            var xNumber = parseFloat(x.innerHTML);
+            var yNumber = parseFloat(y.innerHTML);
+            if (shouldSortAscending) {
+              if (xNumber > yNumber) {
+                shouldSwitch = true;
+                break;
+              }
+            } else {
+              if (xNumber < yNumber) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+          }
+        }
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+      updateHeaderStyles(columnIndex, shouldSortAscending);
+    }
+  
+    function updateHeaderStyles(columnIndex, shouldSortAscending) {
+      var headers = document.getElementsByTagName("TH");
+      for (var i = 0; i < headers.length; i++) {
+        headers[i].classList.remove("ascending", "descending");
+        if (i === columnIndex) {
+          headers[i].classList.add(shouldSortAscending ? "ascending" : "descending");
+        }
+      }
+    }
+  window.addEventListener("load", adjustCellSizes);
+  </script>
+  <title>Results</title>
+</head>
+<body>
+  <h1>Classification Results based on the Job Description</h1>
+  <div class="container">
+    <div class="box">
+      <div class="select-options">
+        <input type="checkbox" id="select-all" class="select-all" onclick="toggleSelectAll()"> Select All
+      </div>
+      <form action="{{ url_for('summarization') }}" method="POST" id="resultsForm">
+        <table id="resultTable">
+          <thead>
+            <tr>
+              <th><a href="#" onclick="sortTable(0)">Filename</a></th>
+              <th>Category</th>
+              <th><a href="#" onclick="sortTable(2)">Matching Percentage</a></th>
+              <th>Basis of Classification</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for index, row in df.iterrows() %}
+            <tr>
+              <td>
+                <input type="checkbox" name="selectedFiles" value="{{ row['Filename'] }}" onclick="updateSelectedFiles()">
+                <a class="file-link" href="{{ url_for('file_page', filename=row['Filename']) }}">{{ row['Filename'] }}</a>
+              </td>
+              <td>{{ row['Category'] }}</td>
+              <td>{{ row['Matching Percentage'] }}</td>
+              <td class="hover-cell">
+                <div class="hover-content">
+                  <span class="hover-text">Hover here to see the results</span>
+                  <span class="actual-content">{{ row['Basis of Classification'] }}</span>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="button-container">
+          <input type="button" class="back-button" value="Back" onclick="goBack()">
+          <input type="submit" class="proceed-button" value="Proceed for summarization" disabled>
+        </div>        
+        <input type="hidden" id="selectedFilesInput" name="selectedFiles" value="">
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  function toggleSelectAll() {
+    var checkboxes = document.getElementsByName('selectedFiles');
+    var selectAllCheckbox = document.getElementById('select-all');
+
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = selectAllCheckbox.checked;
+    }
+    updateSelectedFiles();
+  }
+
+  function updateSelectedFiles() {
+    var selectedFiles = Array.from(document.getElementsByName('selectedFiles'))
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value);
+    document.getElementById('selectedFilesInput').value = selectedFiles.join(',');
+    
+    var proceedButton = document.querySelector('.proceed-button');
+    proceedButton.disabled = selectedFiles.length === 0;
+  }
+</script>
+</body>
+</html>

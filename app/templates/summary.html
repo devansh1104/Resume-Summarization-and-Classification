@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summary Results</title>
+  <style>
+    body {
+      margin: 0;
+      background-image: url("static/a1.jpg");
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      padding-left: 100px;
+      padding-bottom: 50px;
+      padding-right: 100px;
+    }
+
+    table {
+      width: 100%;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      color: #090909;
+      font-size: 40px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 0;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      word-wrap: break-word;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+
+
+    th {
+      background-color: #f0ebf5;
+      color: #0f0303;
+    }
+
+    .button-container {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: transparent;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .button-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .button {
+      background-color: blue;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .button + .button {
+      margin-left: 180px; /* Adjust the margin as needed */
+    }
+
+    .exit-message {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+      text-align: center;
+      color: #090909;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .blank-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fff;
+      color: #090909;
+      font-size: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Summarization Results</h1>
+
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: auto;">File Name</th>
+          <th style="width: 700px;">Summary</th>
+          <th style="width: auto;">Detailed Summary</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for index, row in df.iterrows() %}
+        <tr>
+          <td>{{ row['Filename'] }}</td>
+          <td>{{ row['Summary'] }}</td>
+          <td><a href="{{ url_for('detailed_summary', filename=row['Filename']) }}">Click here for detailed summary</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="button-container">
+    <div class="button-wrapper">
+      <button class="button" onclick="goBack()">Back</button>
+      <button class="button" onclick="showExitMessage()">Exit</button>
+      <a class="button" href="{{ url_for('index') }}">Proceed again for a new process</a>
+    </div>
+  </div>
+
+  <div id="exitMessageContainer" style="display: none;">
+    <div class="exit-message">
+      THANK YOU FOR USING THIS SYSTEM.
+    </div>
+  </div>
+
+  <div id="blankScreenContainer" class="blank-screen" style="display: none;">
+    <p>THANK YOU FOR USING THIS SYSTEM.</p>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function showExitMessage() {
+      document.getElementById("exitMessageContainer").style.display = "block";
+      setTimeout(function() {
+        document.getElementById("blankScreenContainer").style.display = "flex";
+        document.body.innerHTML = "";
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
