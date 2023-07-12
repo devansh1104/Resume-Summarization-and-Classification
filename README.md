@@ -25,19 +25,19 @@ To use the application, follow the steps below:
 </p>
 
 <p align="center">
-  <img src="Images/3.png" alt="image_description" width="800"/><br>
+  <img src="Images/3.png" alt="image_description" width="400"/><br>
 </p>
 
 
 <p align="center">
-  <img src="Images/4.png" alt="image_description" width="800"/><br>
+  <img src="Images/4.png" alt="image_description" width="400"/><br>
 </p>
 
 
 5. Upload Job Description and Resumes: Upload the job description file and a folder containing all the resumes you want to process.
 
 <p align="center">
-  <img src="Images/5.png" alt="image_description" width="800"/><br>
+  <img src="Images/5.png" alt="image_description" width="400"/><br>
 </p>
 
 
