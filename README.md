@@ -1,7 +1,6 @@
-Resume-Summarization-and-Classification
-Resume summarization and classification using NLP and OpenAI.
+# Resume summarization and classification using NLP and OpenAI.
 
-Introduction
+## Introduction
 This repository contains a Python application for resume summarization and classification. It leverages Natural Language Processing (NLP) techniques and OpenAI models to extract key information from resumes and provide a concise summary. Additionally, it performs classification to categorize resumes based on job descriptions.
 
 Instructions
